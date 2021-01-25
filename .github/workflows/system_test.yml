@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     env:
-      SELENIUM_URL: http://0.0.0.0:4444/wd/hub
+      SELENIUM_URL: http://selenium__standalone-chrome:4444/wd/hub # BitBucket: http://0.0.0.0:4444/wd/hub
     services:
       selenium:
         image: selenium/standalone-chrome:latest
@@ -34,8 +34,17 @@ jobs:
       - name: Install Depencencies
         run: gem install bundler
         
-      - name: Install Gems
-        run: bundle install
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-        
+
+      - name: Bundle install
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3            
         
       - name: Prepare Database
         run: bundle exec rails db:prepare

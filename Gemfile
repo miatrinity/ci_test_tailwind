@@ -48,8 +48,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  # Do not require this in CI - we are using a dedicated docker container there  
+  gem 'webdrivers', require: !ENV['SELENIUM_URL']
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
