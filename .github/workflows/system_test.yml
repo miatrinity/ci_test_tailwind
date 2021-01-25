@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     env:
-      SELENIUM_URL: http://selenium__standalone-chrome:4444/wd/hub # BitBucket: http://0.0.0.0:4444/wd/hub
+      SELENIUM_URL: http://127.0.0.1:4444/wd/hub # GitLab: http://selenium__standalone-chrome:4444/wd/hub # BitBucket: http://0.0.0.0:4444/wd/hub
     services:
       selenium:
         image: selenium/standalone-chrome:latest
