@@ -34,9 +34,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     if ENV['SELENIUM_URL']
       # Get the application container's IP
       ip = Socket.ip_address_list.detect(&:ipv4_private?).ip_address
-      puts "**** ip ****"
-      puts "*"*100
-      puts ip
+      puts "**** docker ps ****"
+      puts "*"*100      
+      puts `docker ps`
       puts "*"*100
       # Use the IP instead of localhost so Capybara knows where to direct Selenium
       Capybara.app_host = "http://#{ip}:#{Capybara.server_port}"
