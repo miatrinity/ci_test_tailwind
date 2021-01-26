@@ -2,7 +2,7 @@ require 'application_system_test_case'
 
 class TailwindTest < ApplicationSystemTestCase
   TAILWIND_TEXT_RED_500 = 'rgb(239, 68, 68)'.freeze
-  TAILWIND_TEXT_4XL = '2.55rem'.freeze
+  TAILWIND_TEXT_4XL = '2.25rem'.freeze
 
   test 'Tailwind is Enabled' do
     visit verify_index_path
