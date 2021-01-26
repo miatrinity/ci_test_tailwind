@@ -13,6 +13,8 @@ jobs:
     services:
       selenium:
         image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +24,7 @@ jobs:
         uses: ruby/setup-ruby@v1.63.0
         with: 
           ruby-version: 2.7.2
+          bundler-cache: true
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.4
@@ -34,17 +37,17 @@ jobs:
       - name: Install Depencencies
         run: gem install bundler
         
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-        
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: vendor/bundle
+      #     key: gems-${{ hashFiles('**/Gemfile.lock') }}
+      #     restore-keys: |
+      #       gems-        
 
-      - name: Bundle install
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3            
+      # - name: Bundle install
+      #   run: |
+      #     bundle config path vendor/bundle
+      #     bundle install --jobs 4 --retry 3           
         
       - name: Prepare Database
         run: bundle exec rails db:prepare
