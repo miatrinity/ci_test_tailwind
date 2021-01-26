@@ -39,7 +39,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       puts ip
       puts "*"*100
       # Use the IP instead of localhost so Capybara knows where to direct Selenium
-      host! "http://#{ip}:#{Capybara.server_port}"
+      Capybara.app_host = "http://#{ip}:#{Capybara.server_port}"
+      #host! "http://#{ip}:#{Capybara.server_port}"
     end
   end
 end
